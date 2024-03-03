@@ -1,5 +1,5 @@
 import { cloneTemplate } from '../../../utils/utils';
-import { IEvents } from '../../base/events';
+import { IEvents } from '../../base/Events';
 import { BasketItem, BasketItemProps } from '../../common/Basket/BasketItem';
 
 export type BasketItemViewProps = {

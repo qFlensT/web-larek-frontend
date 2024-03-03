@@ -1,5 +1,5 @@
 import { cloneTemplate, ensureElement } from '../../utils/utils';
-import { IEvents } from '../base/events';
+import { IEvents } from '../base/Events';
 import { Form } from '../common/Form';
 
 export type OrderForm = {

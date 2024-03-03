@@ -1,5 +1,5 @@
 import { API_URL } from '../../utils/constants';
-import { Api } from '../base/api';
+import { Api } from '../base/Api';
 
 export type Order = {
 	payment: string;

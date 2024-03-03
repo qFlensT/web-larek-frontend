@@ -1,5 +1,5 @@
 import { ensureElement } from '../../utils/utils';
-import { IEvents } from '../base/events';
+import { IEvents } from '../base/Events';
 import { Modal } from '../common/Modal';
 
 export class ModalView extends Modal {

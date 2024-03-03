@@ -1,5 +1,5 @@
 import { API_URL, CDN_URL } from '../../utils/constants';
-import { Api } from '../base/api';
+import { Api } from '../base/Api';
 
 export type CatalogItemsDto = {
 	total: number;

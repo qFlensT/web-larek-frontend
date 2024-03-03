@@ -1,5 +1,5 @@
 import './scss/styles.scss';
-import { EventEmitter } from './components/base/events';
+import { EventEmitter } from './components/base/Events';
 import { BasketView } from './components/view/Basket/BasketView';
 import { ModalView } from './components/view/ModalView';
 import { ensureElement, validateForm } from './utils/utils';
