@@ -5,7 +5,7 @@ export const CardCategory = {
 	'софт-скил': { title: 'софт-скил', modifier: 'soft' },
 	'хард-скил': { title: 'хард-скил', modifier: 'hard' },
 	другое: { title: 'другое', modifier: 'other' },
-	дополнительно: { title: 'дополнительно', modifier: 'additional' },
+	дополнительное: { title: 'дополнительно', modifier: 'additional' },
 	кнопка: { title: 'кнопка', modifier: 'button' },
 } as const;
 
@@ -14,10 +14,10 @@ export type CardActions = {
 };
 
 export type CardProps = {
-	type: keyof typeof CardCategory;
-	titleText: string;
-	imageUrl: string;
-	price: string;
+	category: keyof typeof CardCategory;
+	title: string;
+	image: string;
+	price: number;
 };
 
 export class Card<T> extends Component<CardProps & T> {
@@ -56,19 +56,20 @@ export class Card<T> extends Component<CardProps & T> {
 		}
 	}
 
-	set titleText(value: string) {
+	set title(value: string) {
 		this.setText(this.__titleElement, value);
 	}
 
 	set price(value: string) {
-		this.setText(this.__priceElement, value);
+		if (value) this.setText(this.__priceElement, value);
+		else this.setText(this.__priceElement, 'Бесценно');
 	}
 
-	set imageUrl(value: string) {
+	set image(value: string) {
 		this.setImage(this.__imageElement, value);
 	}
 
-	set type(value: keyof typeof CardCategory) {
+	set category(value: keyof typeof CardCategory) {
 		const category = CardCategory[value];
 		this.setText(this.__chipElement, category.title);
 		this.setClass(

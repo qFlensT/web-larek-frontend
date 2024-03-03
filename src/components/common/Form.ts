@@ -8,7 +8,7 @@ export type FormProps = {
 
 export type FormActions<T> = {
 	onSubmit: () => void;
-	onInput: (field: keyof T, value: string) => void;
+	onInput: (field: keyof T, value: string, validationMessage: string) => void;
 };
 
 export class Form<T> extends Component<FormProps> {
@@ -42,9 +42,11 @@ export class Form<T> extends Component<FormProps> {
 
 	private inputHandler = (e: KeyboardEvent) => {
 		const target = e.target as HTMLInputElement;
-		const field = target.name as keyof T;
-		const value = target.value;
-		this.actions.onInput(field, value);
+		this.actions.onInput(
+			target.name as keyof T,
+			target.value,
+			target.validationMessage
+		);
 	};
 
 	private submitHandler = (e: SubmitEvent) => {

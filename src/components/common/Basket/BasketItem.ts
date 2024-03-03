@@ -7,8 +7,8 @@ export type BasketItemActions = {
 
 export type BasketItemProps = {
 	title: string;
-	price: string;
-	index: string;
+	price: string | number | null;
+	index: number | string;
 };
 
 export class BasketItem<T> extends Component<BasketItemProps & T> {
@@ -47,7 +47,8 @@ export class BasketItem<T> extends Component<BasketItemProps & T> {
 	}
 
 	public set price(value: string) {
-		this.setText(this.__priceElement, value);
+		if (value) this.setText(this.__priceElement, value);
+		else this.setText(this.__priceElement, 'Бесценно');
 	}
 
 	public set index(value: string) {

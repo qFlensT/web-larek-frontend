@@ -1,13 +1,18 @@
 import { ensureElement } from '../../../utils/utils';
 import { Component } from '../../base/Component';
 
+export type BasketProps = {
+	totalPrice: string | number;
+};
+
 export type BasketActions = {
 	onBuy: () => void;
 };
 
-export class Basket extends Component<{}> {
+export class Basket extends Component<BasketProps> {
 	protected _basketListElement: HTMLUListElement;
 	protected _basketButtonElement: HTMLButtonElement;
+	protected _totalPriceElement: HTMLSpanElement;
 
 	constructor(
 		protected readonly _container: HTMLElement,
@@ -25,6 +30,11 @@ export class Basket extends Component<{}> {
 			this._container
 		);
 
+		this._totalPriceElement = ensureElement<HTMLSpanElement>(
+			'.basket__price',
+			this._container
+		);
+
 		if (actions) {
 			actions.onBuy &&
 				this._basketButtonElement.addEventListener('click', actions.onBuy);
@@ -33,5 +43,9 @@ export class Basket extends Component<{}> {
 
 	public clear() {
 		this._basketListElement.innerHTML = null;
+	}
+
+	set totalPrice(value: string | number) {
+		this.setText(this._totalPriceElement, value);
 	}
 }
