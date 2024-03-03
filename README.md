@@ -136,9 +136,9 @@ yarn build
 | catalogItem:addToCartClick |                      { id: string }                      | Срабатывает при клике на  кнопку "Добавить в корзину"                                             |
 | modal:open                 |                             -                            | Срабатывает при открытии модального окна                                                          |
 | modal:close                |                             -                            | Срабатывает при закрытии модального окна                                                          |
-| order:change               | { address: string } | { paymentType: "online" | "cash" } | Срабатывает при взаимодействии с формой Order                                                     |
+| order:change               | { address: string } или { paymentType: "online" или "cash" } | Срабатывает при взаимодействии с формой Order                                                     |
 | order:submit               |                             -                            | Срабатывает при отправке формы Order                                                              |
-| contacts:change            |           { email: string } | { phone: string}           | Срабатывает при взаимодействии с формой Contacts                                                  |
+| contacts:change            |           { email: string } или { phone: string}           | Срабатывает при взаимодействии с формой Contacts                                                  |
 | contacts:submit            |                             -                            | Срабатывает при отправке формы Contacts                                                           |
 | basket:buy                 |                             -                            | Срабатывает при нажатии кнопки "Оформить" в корзине                                               |
 | basketItem:delete          |                      { id: string }                      | Срабатывает при удалении товара из корзины                                                        |
