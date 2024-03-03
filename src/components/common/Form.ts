@@ -1,10 +1,14 @@
 import { ensureElement } from '../../utils/utils';
 import { Component } from '../base/Component';
-import { IEvents } from '../base/events';
 
 export type FormProps = {
 	valid: boolean;
 	errors: string[];
+};
+
+export type FormActions<T> = {
+	onSubmit: () => void;
+	onInput: (field: keyof T, value: string) => void;
 };
 
 export class Form<T> extends Component<FormProps> {
@@ -13,7 +17,7 @@ export class Form<T> extends Component<FormProps> {
 
 	constructor(
 		protected _container: HTMLFormElement,
-		protected _events: IEvents
+		protected actions?: Partial<FormActions<T>>
 	) {
 		super(_container);
 
@@ -27,22 +31,26 @@ export class Form<T> extends Component<FormProps> {
 			this._container
 		);
 
-		this._container.addEventListener('input', (e: Event) => {
-			const target = e.target as HTMLInputElement;
-			const field = target.name as keyof T;
-			const value = target.value;
-			this.onInput(field, value);
-		});
+		if (actions?.onInput) {
+			this._container.addEventListener('input', this.inputHandler);
+		}
 
-		this._container.addEventListener('submit', (e: Event) => {
-			e.preventDefault();
-			this._events.emit(`${this._container.name}:submit`);
-		});
+		if (actions?.onSubmit) {
+			this._container.addEventListener('submit', this.submitHandler);
+		}
 	}
 
-	protected onInput(field: keyof T, value: string) {
-		this._events.emit(`${this._container.name}:input`, { field, value });
-	}
+	private inputHandler = (e: KeyboardEvent) => {
+		const target = e.target as HTMLInputElement;
+		const field = target.name as keyof T;
+		const value = target.value;
+		this.actions.onInput(field, value);
+	};
+
+	private submitHandler = (e: SubmitEvent) => {
+		e.preventDefault();
+		this.actions.onSubmit();
+	};
 
 	set valid(value: boolean) {
 		this.setDisabled(this.__submitButtonElement, !value);

@@ -6,14 +6,10 @@ export type CatalogItemPreviewViewProps = {
 	id: string;
 } & CardProps;
 
-export type CatalogItemPreviewViewActions = {
-	onAddToCartClick: (id: string) => void;
-};
-
 export class CatalogItemPreviewView extends Card<CatalogItemPreviewViewProps> {
-	constructor(events: IEvents, actions: CatalogItemPreviewViewActions) {
-		super(cloneTemplate<HTMLDivElement>('#card-preview'), events, {
-			onClick: () => actions.onAddToCartClick(this.id),
+	constructor(events: IEvents) {
+		super(cloneTemplate<HTMLDivElement>('#card-preview'), {
+			onClick: () => events.emit('catalogItem:addedToCart', { id: this.id }),
 		});
 	}
 

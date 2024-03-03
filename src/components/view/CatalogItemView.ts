@@ -6,14 +6,10 @@ export type CatalogItemViewProps = {
 	id: string;
 } & CardProps;
 
-export type CatalogItemViewActions = {
-	onCardClick: (id: string) => void;
-};
-
 export class CatalogItemView extends Card<CatalogItemViewProps> {
-	constructor(events: IEvents, actions: CatalogItemViewActions) {
-		super(cloneTemplate<HTMLButtonElement>('#card-catalog'), events, {
-			onClick: () => actions.onCardClick(this.id),
+	constructor(events: IEvents) {
+		super(cloneTemplate<HTMLButtonElement>('#card-catalog'), {
+			onClick: () => events.emit('catalogItem:click', { id: this.id }),
 		});
 	}
 

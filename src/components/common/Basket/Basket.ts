@@ -1,24 +1,37 @@
 import { ensureElement } from '../../../utils/utils';
 import { Component } from '../../base/Component';
-import { BasketItemProps } from './BasketItem';
 
-export type BasketProps = {
-	items: BasketItemProps[];
+export type BasketActions = {
+	onBuy: () => void;
 };
 
-export class Basket extends Component<BasketProps> {
-	private __basketListElement: HTMLUListElement;
+export class Basket extends Component<{}> {
+	protected _basketListElement: HTMLUListElement;
+	protected _basketButtonElement: HTMLButtonElement;
 
-	constructor(protected readonly _container: HTMLElement) {
+	constructor(
+		protected readonly _container: HTMLElement,
+		actions?: Partial<BasketActions>
+	) {
 		super(_container);
 
-		this.__basketListElement = ensureElement<HTMLUListElement>(
+		this._basketListElement = ensureElement<HTMLUListElement>(
 			'.basket__list',
 			this._container
 		);
+
+		this._basketButtonElement = ensureElement<HTMLButtonElement>(
+			'.basket__button',
+			this._container
+		);
+
+		if (actions) {
+			actions.onBuy &&
+				this._basketButtonElement.addEventListener('click', actions.onBuy);
+		}
 	}
 
-	public set items(value: HTMLLIElement[]) {
-		value.forEach((item) => this.__basketListElement.appendChild(item));
+	public clear() {
+		this._basketListElement.innerHTML = null;
 	}
 }

@@ -1,16 +1,23 @@
 import { Component } from '../base/Component';
 import { ensureElement } from '../../utils/utils';
-import { IEvents } from '../base/events';
 
-interface IModalData {
+export type ModalProps = {
 	content: HTMLElement;
-}
+};
 
-export class Modal extends Component<IModalData> {
+export type ModalActions = {
+	onOpen: () => void;
+	onClose: () => void;
+};
+
+export class Modal extends Component<ModalProps> {
 	protected _closeButton: HTMLButtonElement;
 	protected _content: HTMLElement;
 
-	constructor(container: HTMLElement, protected events: IEvents) {
+	constructor(
+		container: HTMLElement,
+		protected actions?: Partial<ModalActions>
+	) {
 		super(container);
 
 		this._closeButton = ensureElement<HTMLButtonElement>(
@@ -30,16 +37,16 @@ export class Modal extends Component<IModalData> {
 
 	open() {
 		this._container.classList.add('modal_active');
-		this.events.emit('modal:open');
+		this.actions?.onOpen();
 	}
 
 	close() {
 		this._container.classList.remove('modal_active');
 		this.content = null;
-		this.events.emit('modal:close');
+		this.actions?.onClose();
 	}
 
-	render(data: IModalData): HTMLElement {
+	render(data: ModalProps): HTMLElement {
 		super.render(data);
 		this.open();
 		return this._container;

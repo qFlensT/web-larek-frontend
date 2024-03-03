@@ -8,15 +8,16 @@ export type BasketItemActions = {
 export type BasketItemProps = {
 	title: string;
 	price: string;
+	index: string;
 };
 
-export class BasketItem extends Component<BasketItemProps> {
+export class BasketItem<T> extends Component<BasketItemProps & T> {
 	private __indexElement: HTMLSpanElement;
 	private __titleElement: HTMLSpanElement;
 	private __priceElement: HTMLSpanElement;
 	private __removeButtonElement: HTMLButtonElement;
 
-	constructor(_container: HTMLLIElement, actions?: BasketItemActions) {
+	constructor(_container: HTMLLIElement, actions?: Partial<BasketItemActions>) {
 		super(_container);
 		this.__indexElement = ensureElement<HTMLSpanElement>(
 			'.basket__item-index',

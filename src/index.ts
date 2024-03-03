@@ -1,38 +1,35 @@
 import { EventEmitter } from './components/base/events';
-import { Card, CardProps } from './components/common/Card';
+import { BasketView } from './components/view/Basket/BasketView';
 import { CatalogItemPreviewView } from './components/view/CatalogItemPreviewView';
 import {
 	CatalogItemView,
 	CatalogItemViewProps,
 } from './components/view/CatalogItemView';
 import { ModalView } from './components/view/ModalView';
+import { OrderView } from './components/view/OrderView';
 import './scss/styles.scss';
-import { cloneTemplate, ensureElement } from './utils/utils';
+import { ensureElement } from './utils/utils';
 
-const cardsMock: CatalogItemViewProps[] = [
+const cardsMock: Partial<CatalogItemViewProps>[] = [
 	{
-		imageUrl: './images/Subtract.png',
 		price: '100',
 		titleText: 'Карточкаasd',
 		type: 'софт-скил',
 		id: '1',
 	},
 	{
-		imageUrl: './images/Subtract.png',
 		price: '1001',
 		titleText: 'Карточкаasdd',
 		type: 'софт-скил',
 		id: '2',
 	},
 	{
-		imageUrl: './images/Subtract.png',
 		price: '100123',
 		titleText: 'Карточкаddd',
 		type: 'софт-скил',
 		id: '3',
 	},
 	{
-		imageUrl: './images/Subtract.png',
 		price: '10033',
 		titleText: 'Картasdasdочка',
 		type: 'софт-скил',
@@ -40,23 +37,67 @@ const cardsMock: CatalogItemViewProps[] = [
 	},
 ];
 
-const events = new EventEmitter();
-
 const cardCatalog = ensureElement<HTMLElement>('.gallery');
+const basketButton = ensureElement<HTMLButtonElement>('.header__basket');
+const basketCounter = ensureElement<HTMLSpanElement>(
+	'.header__basket-counter',
+	basketButton
+);
 
-cardsMock.forEach((card) => {
-	const modal = new ModalView(events);
+const events = new EventEmitter();
+const basket = new BasketView(events);
+const modal = new ModalView(events);
 
-	const catalogItem = new CatalogItemView(events, {
-		onCardClick: (id) => {
-			console.log('Card click! ID = ', id);
-
-			modal.render({
-				content: new CatalogItemPreviewView(events, {
-					onAddToCartClick: () => console.log('Add to cart! ID = ', id),
-				}).render(cardsMock.find((card) => card.id === id) as CardProps),
-			});
-		},
-	});
-	cardCatalog.appendChild(catalogItem.render(card));
+events.on<{ amount: number }>('basket:change', (data) => {
+	basketCounter.textContent = data.amount.toString();
 });
+
+events.on<{ id: string }>('catalogItem:click', (data) => {
+	const catalogItemPreview = new CatalogItemPreviewView(events);
+	const card = cardsMock.find((card) => card.id === data.id);
+
+	if (card) {
+		modal.render({
+			content: catalogItemPreview.render({
+				id: card.id,
+				price: card.price,
+				titleText: card.titleText,
+				type: card.type,
+			}),
+		});
+	}
+});
+
+events.on<{ id: string }>('catalogItem:addedToCart', (data) => {
+	const card = cardsMock.find((card) => card.id === data.id);
+	if (card) {
+		basket.addItem({
+			id: card.id,
+			price: card.price,
+			title: card.titleText,
+			index: basket.itemsAmount.toString(),
+		});
+	}
+
+	modal.close();
+});
+
+events.on<{ id: string }>('basketItem:delete', (data) => {
+	basket.removeItemById(data.id);
+});
+
+events.on('basket:buy', () => {
+	modal.render({
+		content: new OrderView(events).render(),
+	});
+});
+
+basketButton.addEventListener('click', () => {
+	modal.render({
+		content: basket.render(),
+	});
+});
+
+cardsMock.forEach((card) =>
+	cardCatalog.appendChild(new CatalogItemView(events).render(card))
+);

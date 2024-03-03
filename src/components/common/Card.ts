@@ -1,6 +1,5 @@
 import { ensureElement } from '../../utils/utils';
 import { Component } from '../base/Component';
-import { IEvents } from '../base/events';
 
 export const CardCategory = {
 	'софт-скил': { title: 'софт-скил', modifier: 'soft' },
@@ -28,11 +27,7 @@ export class Card<T> extends Component<CardProps & T> {
 	private __priceElement: HTMLSpanElement;
 	private __buttonElement: HTMLButtonElement | null;
 
-	constructor(
-		container: HTMLElement,
-		protected _events: IEvents,
-		actions?: CardActions
-	) {
+	constructor(container: HTMLElement, actions?: CardActions) {
 		super(container);
 		this.__chipElement = ensureElement<HTMLSpanElement>(
 			'.card__category',
