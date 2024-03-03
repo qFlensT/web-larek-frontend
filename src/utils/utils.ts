@@ -155,3 +155,25 @@ export function createElement<T extends HTMLElement>(
 export function formatNumber(x: number, sep = ' ') {
 	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, sep);
 }
+
+export function validateForm<T>(
+	formData: T,
+	changes: Partial<T>,
+	validationRules: { [K in keyof T]: (value: T[K]) => string | null },
+	component: { errors: string[]; valid: boolean }
+) {
+	Object.assign(formData, changes);
+
+	const errors: string[] = [];
+
+	for (const key in validationRules) {
+		const rule = validationRules[key];
+		const error = rule(formData[key]);
+		if (error) {
+			errors.push(error);
+		}
+	}
+
+	component.errors = errors;
+	component.valid = errors.length === 0;
+}

@@ -3,6 +3,7 @@ import { Component } from '../../base/Component';
 
 export type BasketProps = {
 	totalPrice: string | number;
+	disableBuyButton: boolean;
 };
 
 export type BasketActions = {
@@ -43,6 +44,10 @@ export class Basket extends Component<BasketProps> {
 
 	public clear() {
 		this._basketListElement.innerHTML = null;
+	}
+
+	set disableBuyButton(value: boolean) {
+		this.setDisabled(this._basketButtonElement, value);
 	}
 
 	set totalPrice(value: string | number) {
