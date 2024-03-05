@@ -1,15 +1,6 @@
+import { FormActions, FormProps } from '../../types/types';
 import { ensureElement } from '../../utils/utils';
 import { Component } from '../base/Component';
-
-export type FormProps = {
-	valid: boolean;
-	errors: string[];
-};
-
-export type FormActions<T> = {
-	onSubmit: () => void;
-	onInput: (field: keyof T, value: string, validationMessage: string) => void;
-};
 
 export class Form<T> extends Component<FormProps> {
 	private __submitButtonElement: HTMLButtonElement;

@@ -1,10 +1,6 @@
+import { BasketItemViewProps, IEvents } from '../../../types/types';
 import { cloneTemplate } from '../../../utils/utils';
-import { IEvents } from '../../base/Events';
-import { BasketItem, BasketItemProps } from '../../common/Basket/BasketItem';
-
-export type BasketItemViewProps = {
-	id: string;
-} & BasketItemProps;
+import { BasketItem } from '../../common/Basket/BasketItem';
 
 export class BasketItemView extends BasketItem<BasketItemViewProps> {
 	constructor(events: IEvents) {

@@ -1,11 +1,6 @@
+import { CatalogItemPreviewViewProps, IEvents } from '../../types/types';
 import { cloneTemplate, ensureElement } from '../../utils/utils';
-import { IEvents } from '../base/Events';
-import { Card, CardProps } from '../common/Card';
-
-export type CatalogItemPreviewViewProps = {
-	id: string;
-	description: string;
-} & CardProps;
+import { Card } from '../common/Card';
 
 export class CatalogItemPreviewView extends Card<CatalogItemPreviewViewProps> {
 	private __descriptionElement: HTMLParagraphElement;

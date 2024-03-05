@@ -1,15 +1,6 @@
+import { BasketItemActions, BasketItemProps } from '../../../types/types';
 import { ensureElement } from '../../../utils/utils';
 import { Component } from '../../base/Component';
-
-export type BasketItemActions = {
-	onDelete: () => void;
-};
-
-export type BasketItemProps = {
-	title: string;
-	price: string | number | null;
-	index: number | string;
-};
 
 export class BasketItem<T> extends Component<BasketItemProps & T> {
 	private __indexElement: HTMLSpanElement;

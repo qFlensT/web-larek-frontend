@@ -1,13 +1,6 @@
+import { SuccessActions, SuccessProps } from '../../types/types';
 import { ensureElement, formatNumber } from '../../utils/utils';
 import { Component } from '../base/Component';
-
-export type SuccessActions = {
-	onClick: () => void;
-};
-
-export type SuccessProps = {
-	total: number;
-};
 
 export class Success extends Component<SuccessProps> {
 	private __descriptionElement: HTMLParagraphElement;

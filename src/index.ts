@@ -1,15 +1,16 @@
-import './scss/styles.scss';
 import { EventEmitter } from './components/base/Events';
-import { BasketView } from './components/view/Basket/BasketView';
-import { ModalView } from './components/view/ModalView';
-import { ensureElement, validateForm } from './utils/utils';
-import { CatalogApi, CatalogItemDto } from './components/model/CatalogApi';
+import { CatalogApi } from './components/model/CatalogApi';
 import { OrderApi } from './components/model/OrderApi';
-import { CatalogItemView } from './components/view/CatalogItemView';
+import { BasketView } from './components/view/Basket/BasketView';
 import { CatalogItemPreviewView } from './components/view/CatalogItemPreviewView';
-import { OrderForm, OrderView } from './components/view/OrderView';
-import { ContactsForm, ContactsView } from './components/view/ContactsView';
+import { CatalogItemView } from './components/view/CatalogItemView';
+import { ContactsView } from './components/view/ContactsView';
+import { ModalView } from './components/view/ModalView';
+import { OrderView } from './components/view/OrderView';
 import { SuccessView } from './components/view/SuccessView';
+import './scss/styles.scss';
+import { CatalogItemDto, ContactsForm, OrderForm } from './types/types';
+import { ensureElement, validateForm } from './utils/utils';
 
 const itemsCatalog = ensureElement<HTMLElement>('.gallery');
 const basketButton = ensureElement<HTMLButtonElement>('.header__basket');

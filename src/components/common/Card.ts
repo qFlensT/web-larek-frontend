@@ -1,24 +1,6 @@
+import { CardActions, CardCategory, CardProps } from '../../types/types';
 import { ensureElement } from '../../utils/utils';
 import { Component } from '../base/Component';
-
-export const CardCategory = {
-	'софт-скил': { title: 'софт-скил', modifier: 'soft' },
-	'хард-скил': { title: 'хард-скил', modifier: 'hard' },
-	другое: { title: 'другое', modifier: 'other' },
-	дополнительное: { title: 'дополнительно', modifier: 'additional' },
-	кнопка: { title: 'кнопка', modifier: 'button' },
-} as const;
-
-export type CardActions = {
-	onClick: () => void;
-};
-
-export type CardProps = {
-	category: keyof typeof CardCategory;
-	title: string;
-	image: string;
-	price: number;
-};
 
 export class Card<T> extends Component<CardProps & T> {
 	private __chipElement: HTMLSpanElement;

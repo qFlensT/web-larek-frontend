@@ -1,11 +1,6 @@
+import { IEvents, OrderForm } from '../../types/types';
 import { cloneTemplate, ensureElement } from '../../utils/utils';
-import { IEvents } from '../base/Events';
 import { Form } from '../common/Form';
-
-export type OrderForm = {
-	paymentType: string;
-	address: string;
-};
 
 export class OrderView extends Form<OrderForm> {
 	constructor(events: IEvents) {

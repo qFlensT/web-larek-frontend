@@ -1,10 +1,6 @@
+import { CatalogItemViewProps, IEvents } from '../../types/types';
 import { cloneTemplate } from '../../utils/utils';
-import { IEvents } from '../base/Events';
-import { Card, CardProps } from '../common/Card';
-
-export type CatalogItemViewProps = {
-	id: string;
-} & CardProps;
+import { Card } from '../common/Card';
 
 export class CatalogItemView extends Card<CatalogItemViewProps> {
 	constructor(events: IEvents) {

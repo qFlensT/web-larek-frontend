@@ -1,19 +1,6 @@
+import { CatalogItemDto, CatalogItemsDto } from '../../types/types';
 import { API_URL, CDN_URL } from '../../utils/constants';
 import { Api } from '../base/Api';
-
-export type CatalogItemsDto = {
-	total: number;
-	items: CatalogItemDto[];
-};
-
-export type CatalogItemDto = {
-	id: string;
-	description: string;
-	image: string;
-	title: string;
-	category: 'софт-скил' | 'хард-скил' | 'другое' | 'дополнительное' | 'кнопка';
-	price: number;
-};
 
 export class CatalogApi extends Api {
 	constructor() {

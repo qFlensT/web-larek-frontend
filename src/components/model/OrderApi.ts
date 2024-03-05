@@ -1,19 +1,6 @@
+import { Order, OrderDto } from '../../types/types';
 import { API_URL } from '../../utils/constants';
 import { Api } from '../base/Api';
-
-export type Order = {
-	payment: string;
-	email: string;
-	phone: string;
-	address: string;
-	total: number;
-	items: string[];
-};
-
-export type OrderDto = {
-	id: string;
-	total: number;
-};
 
 export class OrderApi extends Api {
 	constructor() {

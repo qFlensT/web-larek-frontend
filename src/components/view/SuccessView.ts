@@ -1,9 +1,6 @@
+import { IEvents } from '../../types/types';
 import { cloneTemplate } from '../../utils/utils';
-import { Component } from '../base/Component';
-import { IEvents } from '../base/Events';
 import { Success } from '../common/Success';
-
-export type SuccessProps = {};
 
 export class SuccessView extends Success {
 	constructor(events: IEvents) {

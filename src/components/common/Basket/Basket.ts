@@ -1,14 +1,6 @@
+import { BasketActions, BasketProps } from '../../../types/types';
 import { ensureElement } from '../../../utils/utils';
 import { Component } from '../../base/Component';
-
-export type BasketProps = {
-	totalPrice: string | number;
-	disableBuyButton: boolean;
-};
-
-export type BasketActions = {
-	onBuy: () => void;
-};
 
 export class Basket extends Component<BasketProps> {
 	protected _basketListElement: HTMLUListElement;
@@ -54,3 +46,4 @@ export class Basket extends Component<BasketProps> {
 		this.setText(this._totalPriceElement, value);
 	}
 }
+export { BasketProps };

@@ -1,11 +1,6 @@
+import { ContactsForm, IEvents } from '../../types/types';
 import { cloneTemplate } from '../../utils/utils';
-import { IEvents } from '../base/Events';
 import { Form } from '../common/Form';
-
-export type ContactsForm = {
-	email: string;
-	phone: string;
-};
 
 export class ContactsView extends Form<ContactsForm> {
 	constructor(events: IEvents) {
