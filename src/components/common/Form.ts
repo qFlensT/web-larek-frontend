@@ -45,6 +45,10 @@ export class Form<T> extends Component<FormProps> {
 		this.actions.onSubmit();
 	};
 
+	public reset() {
+		this._container.reset();
+	}
+
 	set valid(value: boolean) {
 		this.setDisabled(this.__submitButtonElement, !value);
 	}

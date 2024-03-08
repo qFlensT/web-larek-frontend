@@ -24,6 +24,7 @@ export interface IEvents {
 export type BasketProps = {
 	totalPrice: string | number;
 	disableBuyButton: boolean;
+	items: HTMLElement[];
 };
 
 export type BasketActions = {

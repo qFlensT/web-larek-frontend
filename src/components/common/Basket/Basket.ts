@@ -45,5 +45,9 @@ export class Basket extends Component<BasketProps> {
 	set totalPrice(value: string | number) {
 		this.setText(this._totalPriceElement, value);
 	}
+
+	set items(value: HTMLElement[]) {
+		this._basketListElement.replaceChildren(...value);
+	}
 }
 export { BasketProps };
