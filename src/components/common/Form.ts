@@ -23,7 +23,7 @@ export class Form<T> extends Component<FormProps> {
 		);
 
 		if (actions?.onInput) {
-			this._container.addEventListener('input', this.inputHandler);
+			this._container.addEventListener('input', this.onInputChange);
 		}
 
 		if (actions?.onSubmit) {
@@ -31,7 +31,7 @@ export class Form<T> extends Component<FormProps> {
 		}
 	}
 
-	private inputHandler = (e: KeyboardEvent) => {
+	private onInputChange = (e: KeyboardEvent) => {
 		const target = e.target as HTMLInputElement;
 		this.actions.onInput(
 			target.name as keyof T,

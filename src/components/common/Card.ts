@@ -43,7 +43,7 @@ export class Card<T> extends Component<CardProps & T> {
 	}
 
 	set price(value: string) {
-		if (value) this.setText(this.__priceElement, value);
+		if (value) this.setText(this.__priceElement, `${value} синапсов`);
 		else this.setText(this.__priceElement, 'Бесценно');
 	}
 

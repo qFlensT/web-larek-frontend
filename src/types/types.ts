@@ -22,7 +22,7 @@ export interface IEvents {
 }
 
 export type BasketProps = {
-	totalPrice: string | number;
+	totalPrice: string | number | null;
 	disableBuyButton: boolean;
 	items: HTMLElement[];
 };

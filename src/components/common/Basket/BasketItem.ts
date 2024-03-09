@@ -33,16 +33,16 @@ export class BasketItem<T> extends Component<BasketItemProps & T> {
 		}
 	}
 
-	public set title(value: string) {
+	set title(value: string) {
 		this.setText(this.__titleElement, value);
 	}
 
-	public set price(value: string) {
-		if (value) this.setText(this.__priceElement, value);
+	set price(value: string) {
+		if (value) this.setText(this.__priceElement, `${value} синапсов`);
 		else this.setText(this.__priceElement, 'Бесценно');
 	}
 
-	public set index(value: string) {
+	set index(value: string) {
 		this.setText(this.__indexElement, value);
 	}
 }
