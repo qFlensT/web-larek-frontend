@@ -49,13 +49,13 @@ events.on('catalogItems:set', () => {
 
 events.on('basketItems:change', () => {
 	basketCounter.textContent = `${appState.basketItems.length}`;
-	const pricelessItem = appState.basketItems.find(
+	const isPricelessItemIn = !!appState.basketItems.find(
 		(item) => item.price === null
 	);
 
 	basket.render({
-		disableBuyButton: !appState.basketTotal || !!pricelessItem,
-		totalPrice: !!pricelessItem ? null : appState.basketTotal,
+		disableBuyButton: !appState.basketTotal || isPricelessItemIn,
+		totalPrice: isPricelessItemIn ? null : appState.basketTotal,
 		items: appState.basketItems.map((item) =>
 			new BasketItemView(events).render(item)
 		),
