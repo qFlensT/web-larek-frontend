@@ -16,6 +16,10 @@ export class CatalogItemPreviewView extends Card<CatalogItemPreviewViewProps> {
 		);
 	}
 
+	set disableBuyButton(value: boolean) {
+		this.setDisabled(this._buttonElement, value);
+	}
+
 	set id(id: string) {
 		this._container.dataset.id = id || '';
 	}

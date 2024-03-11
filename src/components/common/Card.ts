@@ -7,7 +7,7 @@ export class Card<T> extends Component<CardProps & T> {
 	private __titleElement: HTMLHeadingElement;
 	private __imageElement: HTMLImageElement;
 	private __priceElement: HTMLSpanElement;
-	private __buttonElement: HTMLButtonElement | null;
+	protected _buttonElement: HTMLButtonElement | null;
 
 	constructor(container: HTMLElement, actions?: CardActions) {
 		super(container);
@@ -28,12 +28,12 @@ export class Card<T> extends Component<CardProps & T> {
 			this._container
 		);
 
-		this.__buttonElement =
+		this._buttonElement =
 			this._container.querySelector<HTMLButtonElement>('.card__button');
 
 		if (actions) {
-			if (this.__buttonElement) {
-				this.__buttonElement.addEventListener('click', actions.onClick);
+			if (this._buttonElement) {
+				this._buttonElement.addEventListener('click', actions.onClick);
 			} else this._container.addEventListener('click', actions.onClick);
 		}
 	}

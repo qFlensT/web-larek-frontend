@@ -49,26 +49,27 @@ events.on('catalogItems:set', () => {
 
 events.on('basketItems:change', () => {
 	basketCounter.textContent = `${appState.basketItems.length}`;
-	const isPricelessItemIn = !!appState.basketItems.find(
-		(item) => item.price === null
-	);
 
 	basket.render({
-		disableBuyButton: !appState.basketTotal || isPricelessItemIn,
-		totalPrice: isPricelessItemIn ? null : appState.basketTotal,
+		disableBuyButton: !appState.basketTotal,
+		totalPrice: appState.basketTotal,
 		items: appState.basketItems.map((item) =>
 			new BasketItemView(events).render(item)
 		),
 	});
 });
 
-events.on<{ id: string }>('catalogItem:click', ({ id }) =>
+events.on<{ id: string }>('catalogItem:click', ({ id }) => {
+	const item = appState.getCatalogItemById(id);
+
 	modal.render({
-		content: new CatalogItemPreviewView(events).render(
-			appState.getCatalogItemById(id)
-		),
-	})
-);
+		content: new CatalogItemPreviewView(events).render({
+			...item,
+			disableBuyButton:
+				item.price === null || appState.basketItems.includes(item),
+		}),
+	});
+});
 
 events.on<{ id: string }>('catalogItem:addToCartClick', ({ id }) => {
 	appState.addBasketItem(appState.getCatalogItemById(id));

@@ -42,10 +42,8 @@ export class Basket extends Component<BasketProps> {
 		this.setDisabled(this._basketButtonElement, value);
 	}
 
-	set totalPrice(value: string | number | null) {
-		if (value === null || value === undefined) {
-			this.setText(this._totalPriceElement, 'Бесценно');
-		} else this.setText(this._totalPriceElement, `${value} синапсов`);
+	set totalPrice(value: string | number) {
+		this.setText(this._totalPriceElement, `${value} синапсов`);
 	}
 
 	set items(value: HTMLElement[]) {
