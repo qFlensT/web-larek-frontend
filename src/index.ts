@@ -53,8 +53,11 @@ events.on('basketItems:change', () => {
 	basket.render({
 		disableBuyButton: !appState.basketTotal,
 		totalPrice: appState.basketTotal,
-		items: appState.basketItems.map((item) =>
-			new BasketItemView(events).render(item)
+		items: appState.basketItems.map((item, index) =>
+			new BasketItemView(events).render({
+				...item,
+				index: index + 1,
+			})
 		),
 	});
 });
